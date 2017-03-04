@@ -58,7 +58,7 @@ var options = { frequency: 3000 };  // Update every 3 seconds
 
 // display the address information for all contacts 
  
-function onSuccess(contacts) {
+function onSuccessContacts(contacts) {
     for (var i = 0; i < contacts.length; i++) {
         for (var j = 0; j < contacts[i].addresses.length; j++) {
             alert("Pref: "         + contacts[i].addresses[j].pref          + "\n" +
@@ -73,19 +73,19 @@ function onSuccess(contacts) {
     }
 };
  
-function onError(contactError) {
+function onErrorContacts(contactError) {
     alert('onError!');
 };
  
 
 
-function deviceInfo() {
+function displayContacts() {
 
 	// find all contacts 
 	var options = new ContactFindOptions();
 	options.filter = "";
 	options.multiple = true;
 	Var filter = ["displayName", "addresses"];
-	navigator.contacts.find(filter, onSuccess, onError, options);
+	navigator.contacts.find(filter, onSuccessContacts, onErrorContacts, options);
 	
 }
