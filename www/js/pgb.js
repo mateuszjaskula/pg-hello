@@ -4,7 +4,7 @@ function init() {
 
 function onDeviceReady() {
 	navigator.notification.beep(1);
-        navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
+//        navigator.accelerometer.watchAcceleration(onSuccess, onError, options);
 }
 
 function deviceInfo() {
@@ -55,3 +55,37 @@ function onError() {
 }
 
 var options = { frequency: 3000 };  // Update every 3 seconds
+
+// display the address information for all contacts 
+ 
+function onSuccess(contacts) {
+    for (var i = 0; i < contacts.length; i++) {
+        for (var j = 0; j < contacts[i].addresses.length; j++) {
+            alert("Pref: "         + contacts[i].addresses[j].pref          + "\n" +
+                "Type: "           + contacts[i].addresses[j].type          + "\n" +
+                "Formatted: "      + contacts[i].addresses[j].formatted     + "\n" +
+                "Street Address: " + contacts[i].addresses[j].streetAddress + "\n" +
+                "Locality: "       + contacts[i].addresses[j].locality      + "\n" +
+                "Region: "         + contacts[i].addresses[j].region        + "\n" +
+                "Postal Code: "    + contacts[i].addresses[j].postalCode    + "\n" +
+                "Country: "        + contacts[i].addresses[j].country);
+        }
+    }
+};
+ 
+function onError(contactError) {
+    alert('onError!');
+};
+ 
+
+
+function deviceInfo() {
+
+	// find all contacts 
+	var options = new ContactFindOptions();
+	options.filter = "";
+	options.multiple = true;
+	Var filter = ["displayName", "addresses"];
+	navigator.contacts.find(filter, onSuccess, onError, options);
+	
+}
